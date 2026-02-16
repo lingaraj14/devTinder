@@ -48,7 +48,7 @@ const userSchema = new Schema(
       type: String,
       validate: (value) => {
         if (!["Male", "Female", "Other"].includes(value)) {
-          throw new Error("Gender is not valid!");
+          throw new Error("'{VALUE}' - is not a valid gender.");
         }
       },
     },
@@ -61,6 +61,10 @@ const userSchema = new Schema(
           throw new Error("Invalid photo link!");
         }
       },
+    },
+    about: {
+      type: String,
+      default: "This is a default about of the user!",
     },
     skills: {
       type: [String],
