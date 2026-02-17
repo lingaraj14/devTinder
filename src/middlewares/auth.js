@@ -13,7 +13,7 @@ const userAuth = async (req, res, next) => {
 
     const { token } = req.cookies;
 
-    const cookies = await jwt.verify(token, "Lingaraj@Tech4");
+    const cookies = await jwt.verify(token, process.env.JWT_SECRET);
     const { _id } = cookies;
 
     const userDoc = await userModel.findById(_id);

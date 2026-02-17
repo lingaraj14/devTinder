@@ -8,6 +8,8 @@ const {
   validateReviewConnection,
 } = require("../utils/validator");
 
+const sendEmail = require("../utils/sendEmail");
+
 router.post("/connection/:status/:userId", userAuth, async (req, res) => {
   try {
     const fromUserId = req.user._id;
@@ -36,6 +38,12 @@ router.post("/connection/:status/:userId", userAuth, async (req, res) => {
 
     const connection = new connectionModel({ fromUserId, toUserId, status });
     const connectionDoc = await connection.save();
+
+    const resSendEmail = await sendEmail.run(
+      "You get a friend request from " + req.user.firstName,
+      req.user.firstName + " showing interest to " + toUserDoc.firstName,
+    );
+    console.log("resSendEmail: ", resSendEmail);
 
     if (connectionDoc) {
       const message =

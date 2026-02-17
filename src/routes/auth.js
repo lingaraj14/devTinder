@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
 
     //Token generate
     //Instead of getnerating the token code here, we can write this is Schema label and call here(it would be more readable and good)
-    /* const token = await jwt.sign({ _id: isUser._id }, "Lingaraj@Tech4", {
+    /* const token = await jwt.sign({ _id: isUser._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     }); //`expiresIn` parameter is optional */
 

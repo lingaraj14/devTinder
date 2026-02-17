@@ -78,7 +78,7 @@ userSchema.methods.getJWT = async function () {
   //always use regular function, bcz of `this` used
   const user = this; //here `this` refers to the `userSchema` object
 
-  const token = await jwt.sign({ _id: user._id }, "Lingaraj@Tech4", {
+  const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   }); //`expiresIn` parameter is optional
 
